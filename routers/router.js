@@ -3,8 +3,9 @@ const cron = require('node-cron');
 
 const Rides = require('../models/ridesModel.js');
 
+Rides.updateWaitTimes()
 cron.schedule('* * * * *', () => {
-  Rides.checkWaitTimes()
+  Rides.updateWaitTimes()
     .catch(error => console.log("Cron: ", error.message));
 });
 

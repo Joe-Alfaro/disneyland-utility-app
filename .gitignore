@@ -63,5 +63,4 @@ typings/
 .next
 
 #
-*.db
-*.db3
+lambda.db3

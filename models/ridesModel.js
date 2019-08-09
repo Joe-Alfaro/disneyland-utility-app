@@ -1,25 +1,28 @@
+const moment = require('moment')
 const Themeparks = require("themeparks");
-const db = require('../data/dbConfig');
 
 const Disneyland = new Themeparks.Parks.DisneylandResortMagicKingdom();
 
-const getAll = async () => await db('rides');
 
-const updateRide = async ({id, waitTime, status}) => (
-  await db('rides')
-    .where({id})
-    .update({waitTime, status})
-    .catch(error => console.log('updateRide: ', error))
-);
+const getAll = () => db('rides');
 
-const checkWaitTimes = async () => {
-  const rideTimes = await Disneyland.GetWaitTimes()
-  rideTimes.forEach(ride => {
-    updateRide({id: ride.id,status: ride.status,waitTime: ride.waitTime})
-  })
+const updateWaitTimes = async () => {
+  const rideTimes = await Disneyland.GetWaitTimes();
+  rideTimes.forEach(async ride => {
+    const { id, status, waitTime } = ride;
+    let { fastPassStartTime, fastPassEndTime } = ride.meta;
+    if(!fastPassStartTime){
+      fastPassStartTime = '23:59:59';
+      fastPassEndTime = '23:59:59';
+    };
+    await db('rides')
+      .where({id})
+      .update({waitTime, status, fastPassStartTime, fastPassEndTime})
+      .catch(error => console.log('updateRide: ', error))
+  });
 };
 
 module.exports = {
   getAll,
-  checkWaitTimes
+  updateWaitTimes
 };
