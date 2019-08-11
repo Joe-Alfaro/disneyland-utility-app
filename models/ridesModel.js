@@ -1,5 +1,6 @@
 const moment = require('moment')
 const Themeparks = require("themeparks");
+const db = require('../data/dbConfig');
 
 const Disneyland = new Themeparks.Parks.DisneylandResortMagicKingdom();
 
