@@ -4,8 +4,8 @@ exports.up = (knex, Promise) => (
       table.integer('id').unique().notNullable();
       table.text('name').unique().notNullable();
       table.string('status', 255).notNullable();
-      table.string('fastpassStartTime').notNullable();
-      table.string('fastpassEndTime').notNullable();
+      table.string('fastPassStartTime').notNullable();
+      table.string('fastPassEndTime').notNullable();
       table.string('park').notNullable();
       table.boolean('singleRider').notNullable();
       table.integer('waitTime').notNullable();
