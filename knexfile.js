@@ -3,7 +3,7 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: './data/lambda.db3',
+      filename: './data/database.db3',
     },
     migrations: {
       directory: './data/migrations',
@@ -17,19 +17,19 @@ module.exports = {
       },
     },
   },
+
   production: {
-    client: 'pg',
-    useNullAsDefault: true,
+    client: "pg",
     connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: './data/migrations',
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds',
-    },
-  },
+      directory: "./data/seeds"
+    }
+  }
 };
