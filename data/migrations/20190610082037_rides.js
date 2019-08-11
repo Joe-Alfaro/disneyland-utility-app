@@ -1,7 +1,7 @@
 exports.up = (knex, Promise) => (
   knex.schema
     .createTable('rides', table => {
-      table.integer('id').unique().notNullable();
+      table.string('id').unique().notNullable();
       table.text('name').unique().notNullable();
       table.string('status', 255).notNullable();
       table.string('fastPassStartTime').notNullable();
